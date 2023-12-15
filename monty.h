@@ -1,12 +1,14 @@
 #ifndef MONTY_H
 #define MONTY_H
+
+#define _GNU_SOURCE
 #include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
 #include <unistd.h>
-#include <fcntl.h>
 #include <string.h>
+#include <stdlib.h>
 #include <ctype.h>
+#include <stdarg.h>
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -37,28 +39,46 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-char *_realloc(char *ptr, unsigned int old_size, unsigned int new_size);
-ssize_t getstdin(char **lineptr, int file);
-char  *clean_line(char *content);
-void f_push(stack_t **head, unsigned int number);
-void f_pall(stack_t **head, unsigned int number);
-void f_pint(stack_t **head, unsigned int number);
-int execute(char *content, stack_t **head, unsigned int counter, FILE *file);
-void free_stack(stack_t *head);
-void f_pop(stack_t **head, unsigned int cmp);
-void f_swap(stack_t **head, unsigned int cmp);
-void f_add(stack_t **head, unsigned int cmp);
-void f_nop(stack_t **head, unsigned int cmp);
-void f_sub(stack_t **head, unsigned int cmp);
-void f_div(stack_t **head, unsigned int cmp);
-void f_mul(stack_t **head, unsigned int cmp);
-void f_mod(stack_t **head, unsigned int cmp);
-void f_pchar(stack_t **head, unsigned int cmp);
-void f_pstr(stack_t **head, unsigned int cmp);
-void f_rotl(stack_t **head, unsigned int cmp);
-void f_rotr(stack_t **head, __attribute__((unused)) unsigned int cmp);
-void addnode(stack_t **head, int n);
-void addqueue(stack_t **head, int n);
-void f_queue(stack_t **head, unsigned int cmp);
-void f_stack(stack_t **head, unsigned int cmp);
+extern stack_t *head;
+typedef void (*op_func)(stack_t **, unsigned int);
+
+/*file operations*/
+void openFile(char *file_name);
+int parseLine(char *buffer, int line_number, int format);
+void readFile(FILE *);
+int len_chars(FILE *);
+void findFunc(char *, char *, int, int);
+
+/*Stack operations*/
+stack_t *create_node(int n);
+void free(void);
+void pstack(stack_t **, unsigned int);
+void add_stack(stack_t **, unsigned int);
+void add_queue(stack_t **, unsigned int);
+
+void callFun(op_func, char *, char *, int, int);
+
+void print_top(stack_t **, unsigned int);
+void pop_top(stack_t **, unsigned int);
+void nop(stack_t **, unsigned int);
+void swap(stack_t **, unsigned int);
+
+/*Math operations with nodes*/
+void add(stack_t **, unsigned int);
+void sub(stack_t **, unsigned int);
+void div(stack_t **, unsigned int);
+void mul(stack_t **, unsigned int);
+void mod(stack_t **, unsigned int);
+
+/*String operations*/
+void pchar(stack_t **, unsigned int);
+void pstring(stack_t **, unsigned int);
+void rotl(stack_t **, unsigned int);
+
+/*Error hanlding*/
+void error(int error_code, ...);
+void moreErr(int error_code, ...);
+void stringErr(int error_code, ...);
+void rotr(stack_t **, unsigned int);
+
 #endif

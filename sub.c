@@ -1,11 +1,11 @@
 #include "monty.h"
 /**
-  *f_sub- sustration
+  *sub- sustration
   *@head: head
   *@cmp: nombre lignes
   *Return: no return
  */
-void f_sub(stack_t **head, unsigned int cmp)
+void sub(stack_t **head, unsigned int cmp)
 {
 	stack_t *que;
 	int sust, nd;
