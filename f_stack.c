@@ -2,11 +2,11 @@
 
 
 /**
- * add_to_stack - Adds a node to the stack.
+ * add_stack - Adds a node to the stack.
  * @new: the new node.
  * @ln: counter.
  */
-void add_to_stack(stack_t **new, __attribute__((unused))unsigned int ln)
+void add_stack(stack_t **new, __attribute__((unused))unsigned int ln)
 {
 	stack_t *tmp;
 
@@ -25,11 +25,11 @@ void add_to_stack(stack_t **new, __attribute__((unused))unsigned int ln)
 
 
 /**
- * print_stack - Adds a node to the stack.
+ * pstack - Adds a node to the stack.
  * @stack: head.
  * @cmp: counter.
  */
-void print_stack(stack_t **stack, unsigned int cmp)
+void pstack(stack_t **stack, unsigned int cmp)
 {
 	stack_t *tmp;
         (void) cmp;
