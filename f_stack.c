@@ -32,7 +32,7 @@ void add_stack(stack_t **new, __attribute__((unused))unsigned int ln)
 void pstack(stack_t **stack, unsigned int cmp)
 {
 	stack_t *tmp;
-        (void) cmp;
+        (void)cmp;
         if (stack == NULL)
                 exit(EXIT_FAILURE);
         tmp = *stack;
