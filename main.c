@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	open_file(argv[1]);
-	free_nodes();
+	openFile(argv[1]);
+	free();
 	return (0);
 }
 
@@ -31,7 +31,7 @@ stack_t *create_node(int n)
 
 	node = malloc(sizeof(stack_t));
 	if (node == NULL)
-		err(4);
+		error(4);
 	node->next = NULL;
 	node->prev = NULL;
 	node->n = n;
@@ -59,25 +59,25 @@ void free(void)
 
 /**
  * add_queue - Adds a node to the queue.
- * @new_node: Pointer to the new node.
- * @ln: line number of the opcode.
+ * @new: the new node.
+ * @cmp: counter.
  */
-void add_queue(stack_t **new_node, __attribute__((unused))unsigned int ln)
+void add_queue(stack_t **new, __attribute__((unused))unsigned int cmp)
 {
 	stack_t *tmp;
 
-	if (new_node == NULL || *new_node == NULL)
+	if (new == NULL || *new == NULL)
 		exit(EXIT_FAILURE);
 	if (head == NULL)
 	{
-		head = *new_node;
+		head = *new;
 		return;
 	}
 	tmp = head;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 
-	tmp->next = *new_node;
-	(*new_node)->prev = tmp;
+	tmp->next = *new;
+	(*new)->prev = tmp;
 
 }
